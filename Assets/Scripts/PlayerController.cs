@@ -43,34 +43,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canMove == true && moveInput != Vector2.zero)
+        if(!PauseMenu.isPaused)
         {
-            //rb.velocity = Vector2.ClampMagnitude(rb.velocity + (moveInput * moveSpeed * Time.deltaTime), maxSpeed);
-            rb.AddForce(moveInput * moveSpeed * Time.deltaTime);
+            if (canMove == true && moveInput != Vector2.zero)
+            {
+                //rb.velocity = Vector2.ClampMagnitude(rb.velocity + (moveInput * moveSpeed * Time.deltaTime), maxSpeed);
+                rb.AddForce(moveInput * moveSpeed * Time.deltaTime);
 
-            if(rb.velocity.magnitude > maxSpeed)
-            {
-                float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
-                rb.velocity = rb.velocity.normalized * limitedSpeed;
-            }
+                if (rb.velocity.magnitude > maxSpeed)
+                {
+                    float limitedSpeed = Mathf.Lerp(rb.velocity.magnitude, maxSpeed, idleFriction);
+                    rb.velocity = rb.velocity.normalized * limitedSpeed;
+                }
 
-            if (moveInput.x > 0)
-            {
-                spriteRenderer.flipX = false;
-                gameObject.BroadcastMessage("IsFacingRight", true);
+                if (moveInput.x > 0)
+                {
+                    spriteRenderer.flipX = false;
+                    gameObject.BroadcastMessage("IsFacingRight", true);
+                }
+                else if (moveInput.x < 0)
+                {
+                    spriteRenderer.flipX = true;
+                    gameObject.BroadcastMessage("IsFacingRight", false);
+                }
+                IsMoving = true;
             }
-            else if (moveInput.x < 0)
+            else
             {
-                spriteRenderer.flipX = true;
-                gameObject.BroadcastMessage("IsFacingRight", false);
+                rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
+                IsMoving = false;
             }
-            IsMoving = true;
         }
-        else
-        {
-            rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
-            IsMoving = false;
-        }
+        
     }
 
 
@@ -82,8 +86,11 @@ public class PlayerController : MonoBehaviour
 
     void OnFire()
     {
-        animator.SetTrigger("swordAttack");
-        attackSound.Play();
+        if (!PauseMenu.isPaused)
+        {
+            animator.SetTrigger("swordAttack");
+            attackSound.Play();
+        }
     }
 
     void LockMovement()

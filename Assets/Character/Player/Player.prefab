@@ -89,12 +89,12 @@ GameObject:
   - component: {fileID: 7039760264823966229}
   - component: {fileID: 7248393820690060814}
   - component: {fileID: 1335686923148152010}
-  - component: {fileID: 7146200602328511362}
   - component: {fileID: 5259271351805049219}
   - component: {fileID: 5468095864991216844}
   - component: {fileID: 2243634251390766421}
   - component: {fileID: 4398997529389198326}
   - component: {fileID: 1142853368035057115}
+  - component: {fileID: 5959588304185447685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -238,22 +238,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &7146200602328511362
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5897064120304732570}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.03604865, y: 0.04495228}
-  serializedVersion: 2
-  m_Radius: 0.2828444
 --- !u!95 &5259271351805049219
 Animator:
   serializedVersion: 5
@@ -295,6 +279,7 @@ MonoBehaviour:
   _health: 10
   _targetable: 1
   _invincible: 0
+  healthBar: {fileID: 0}
 --- !u!82 &2243634251390766421
 AudioSource:
   m_ObjectHideFlags: 0
@@ -583,3 +568,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &5959588304185447685
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897064120304732570}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.025791168, y: 0.40818477}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.20833333}
+    oldSize: {x: 3, y: 3}
+    newSize: {x: 3, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8054199, y: 1.184236}
+  m_EdgeRadius: 0
