@@ -26,7 +26,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
 
             if (value < _health)
             {
-                //hitSound.Play();
+                hitSound.Play();
                 animator.SetTrigger("hit");
                 RectTransform textTransform = Instantiate(healthText).GetComponent<RectTransform>();
                 textTransform.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -79,6 +79,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
     public float _health = 3;
     public bool _targetable = true;
     public bool _invincible = false;
+    public HealthBar healthBar;
 
     public void Start()
     {
@@ -86,6 +87,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         animator.SetBool("isAlive", isAlive);
         rb = GetComponent<Rigidbody2D>();
         physicCollider = GetComponent<Collider2D>();
+        healthBar.SetMaxHealth((int)_health);
     }
 
     public void OnHit(float damage, Vector2 knockback)
@@ -95,8 +97,9 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         {
           
             Health -= damage;
-            rb.AddForce(knockback, ForceMode2D.Impulse);
             
+            rb.AddForce(knockback, ForceMode2D.Impulse);
+            healthBar.SetHealth((int)Health);
             if (isInvincibleEnabled)
             {
                 Invincible = true;
@@ -111,6 +114,7 @@ public class DamageableCharacter : MonoBehaviour, IDamageable
         {
             
             Health -= damage;
+            healthBar.SetHealth((int)Health);
             if (isInvincibleEnabled)
             {
                 Invincible = true;
